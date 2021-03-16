@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct STU {
+	char name[20];
+	int score;
+	int order;
+};
+struct STU *student;
+int compare(const void *a, const void *b);
+
+int main(void)
+{
+	int n; // how many people
+	scanf("%d", &n);
+	student = (STU *)malloc(sizeof(struct STU) * n);
+	int i, j;
+	for (i = 0; i < n; i++) {
+		scanf("%s ", student[i].name);
+		scanf("%d", &student[i].score);
+		student[i].order = i;
+	}
+	qsort(student, n, sizeof(struct STU), compare);
+	for(i = 0; i < n; i++){
+		printf("%s", student[i].name);
+		printf("\n");
+	}
+
+	return 0;
+}
+int compare(const void *a, const void *b)
+{
+	struct STU *A = (struct STU*)a;
+	struct STU *B = (struct STU*)b;
+	
+	if (A->score <= B->score) return 1;
+	else if (A->score > B->score) return -1;
+//	else if (A->order < B->order) return -1; 	
+}
